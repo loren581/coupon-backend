@@ -23,7 +23,8 @@ public enum ErrMessage {
     COSTUMER_HAS_THIS_COUPON("YOU CANT PURCHASE THE SAME COUPON TWICE"),
     COUPON_OUT_OF_STOCK("sorry the coupon is out of stock"),
     COUPON_EXPIRED("cant purchase an expired coupon"),
-    NOT_SUCH_AN_EMAIL("this email isnt exists");
+    NOT_SUCH_AN_EMAIL("this email isnt exists"),
+    NOT_ALLOWED("nice try you are not allowed ");
 
 
     private String message;

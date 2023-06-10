@@ -9,8 +9,10 @@ public interface CompanyRepository extends JpaRepository<Company, Integer> {
 
     boolean existsByEmail(String email);
 
-@Query(nativeQuery = true,value = "select id from company where email = ?")
-     int companyEmailToId(String email);
+    @Query(nativeQuery = true, value = "select id from company where email = ?")
+    int companyEmailToId(String email);
+
+    boolean existsByEmailAndPassword(String email, String password);
 
 
 }

@@ -3,22 +3,31 @@ package org.jb.project2.controllers;
 import org.jb.project2.beans.Company;
 import org.jb.project2.beans.Customer;
 import org.jb.project2.exceptions.CouponSystemException;
+import org.jb.project2.exceptions.ErrMessage;
+import org.jb.project2.login.ClientType;
+import org.jb.project2.security.TokenService;
 import org.jb.project2.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/admin")
 public class AdminController {
     @Autowired
+    TokenService tokenService;
+    @Autowired
     AdminService adminService;
 
     @GetMapping
     @RequestMapping("companies")
-    public List<Company> getAllCompanies() {
+    public List<Company> getAllCompanies(@RequestHeader(value = "Authorization")UUID token) throws CouponSystemException {
+        if (!tokenService.isUserAllowed(token, ClientType.ADMINISTRATOR)){
+            throw new CouponSystemException(ErrMessage.NOT_ALLOWED);
+        }
         return adminService.getAllCompanies();
     }
 

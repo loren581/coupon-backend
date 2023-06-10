@@ -8,4 +8,6 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer> {
     boolean existsByEmail(String email);
     @Query(nativeQuery = true,value = "select id from customer where email = ?")
     int customerEmailToId(String email);
+    boolean existsByEmailAndPassword(String email, String password);
+
 }
