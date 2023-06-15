@@ -57,4 +57,8 @@ public class TokenServiceImpl implements TokenService {
         ClientType clientType1 = information.getClientType();
         return clientType1.equals(clientType);
     }
+
+    public Map<UUID, Information> getTokens() {
+        return tokens;
+    }
 }

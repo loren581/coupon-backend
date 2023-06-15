@@ -29,6 +29,6 @@ public class Customer {
     @Column(nullable = false,length = 40)
 
     private String password;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<Coupon> coupons;
 }

@@ -24,7 +24,8 @@ public enum ErrMessage {
     COUPON_OUT_OF_STOCK("sorry the coupon is out of stock"),
     COUPON_EXPIRED("cant purchase an expired coupon"),
     NOT_SUCH_AN_EMAIL("this email isnt exists"),
-    NOT_ALLOWED("nice try you are not allowed ");
+    NOT_ALLOWED("nice try you are not allowed "),
+    COUPON_DOESNT_EXIST("sorry there is not such a coupon");
 
 
     private String message;

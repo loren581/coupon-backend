@@ -14,6 +14,7 @@ import org.jb.project2.services.AdminService;
 import org.jb.project2.utils.FactoryMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Order(1)
 public class AdminServiceTest implements CommandLineRunner {
 
 

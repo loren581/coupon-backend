@@ -26,7 +26,7 @@ public class Company {
     @Column(nullable = false,length = 40)
 
     private String password;
-    @OneToMany(mappedBy = "company",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "company",cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
     private List<Coupon> coupons;
 
 }

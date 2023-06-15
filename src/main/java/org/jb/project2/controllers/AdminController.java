@@ -33,47 +33,74 @@ public class AdminController {
 
     @GetMapping
     @RequestMapping("customers")
-    public List<Customer> getAllCustomers() {
+    public List<Customer> getAllCustomers(@RequestHeader(value = "Authorization")UUID token) throws CouponSystemException {
+        if (!tokenService.isUserAllowed(token, ClientType.ADMINISTRATOR)){
+            throw new CouponSystemException(ErrMessage.NOT_ALLOWED);
+        }
         return adminService.getAllCustomers();
     }
     @GetMapping
     @RequestMapping("companies/{companyId}")
-    public Company getSingleCompany(@PathVariable int companyId) throws CouponSystemException {
+    public Company getSingleCompany(@RequestHeader(value = "Authorization")UUID token,@PathVariable int companyId) throws CouponSystemException {
+        if (!tokenService.isUserAllowed(token, ClientType.ADMINISTRATOR)){
+            throw new CouponSystemException(ErrMessage.NOT_ALLOWED);
+        }
         return adminService.getSingleCompany( companyId);
     }
     @GetMapping
     @RequestMapping("customers/{customersId}")
-    public Customer getSingleCustomer(@PathVariable int customersId) throws CouponSystemException {
+    public Customer getSingleCustomer(@RequestHeader(value = "Authorization")UUID token,@PathVariable int customersId) throws CouponSystemException {
+        if (!tokenService.isUserAllowed(token, ClientType.ADMINISTRATOR)){
+            throw new CouponSystemException(ErrMessage.NOT_ALLOWED);
+        }
         return adminService.getSingleCustomer( customersId);
     }
     @PostMapping("companies")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addCompany(@RequestBody Company company) throws CouponSystemException {
+    public void addCompany(@RequestHeader(value = "Authorization")UUID token,@RequestBody Company company) throws CouponSystemException {
+        if (!tokenService.isUserAllowed(token, ClientType.ADMINISTRATOR)){
+            throw new CouponSystemException(ErrMessage.NOT_ALLOWED);
+        }
         adminService.addCompany(company);
     }
     @PostMapping("customers")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addCustomer(@RequestBody Customer customer) throws CouponSystemException {
+    public void addCustomer(@RequestHeader(value = "Authorization")UUID token,@RequestBody Customer customer) throws CouponSystemException {
+        if (!tokenService.isUserAllowed(token, ClientType.ADMINISTRATOR)){
+            throw new CouponSystemException(ErrMessage.NOT_ALLOWED);
+        }
         adminService.addCustomer(customer);
     }
     @DeleteMapping("companies/{companyId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCompany(@PathVariable int companyId) throws CouponSystemException {
+    public void deleteCompany(@RequestHeader(value = "Authorization")UUID token,@PathVariable int companyId) throws CouponSystemException {
+        if (!tokenService.isUserAllowed(token, ClientType.ADMINISTRATOR)){
+            throw new CouponSystemException(ErrMessage.NOT_ALLOWED);
+        }
         adminService.deleteCompany(companyId);
     }
-    @DeleteMapping("customers/{customersId}")
+    @DeleteMapping("customers/{customerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCustomer(@PathVariable int customerId) throws CouponSystemException {
+    public void deleteCustomer(@RequestHeader(value = "Authorization")UUID token,@PathVariable int customerId) throws CouponSystemException {
+        if (!tokenService.isUserAllowed(token, ClientType.ADMINISTRATOR)){
+            throw new CouponSystemException(ErrMessage.NOT_ALLOWED);
+        }
         adminService.deleteCustomer(customerId);
     }
     @PutMapping("companies/{companyId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateCompany(@PathVariable int companyId,@RequestBody Company company) throws CouponSystemException {
+    public void updateCompany(@RequestHeader(value = "Authorization")UUID token,@PathVariable int companyId,@RequestBody Company company) throws CouponSystemException {
+        if (!tokenService.isUserAllowed(token, ClientType.ADMINISTRATOR)){
+            throw new CouponSystemException(ErrMessage.NOT_ALLOWED);
+        }
         adminService.updateCompany(companyId,company);
     }
     @PutMapping("customers/{customersId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateCustomer(@PathVariable int customersId,@RequestBody Customer customer) throws CouponSystemException {
+    public void updateCustomer(@RequestHeader(value = "Authorization")UUID token,@PathVariable int customersId,@RequestBody Customer customer) throws CouponSystemException {
+        if (!tokenService.isUserAllowed(token, ClientType.ADMINISTRATOR)){
+            throw new CouponSystemException(ErrMessage.NOT_ALLOWED);
+        }
         adminService.updateCustomer(customersId,customer);
     }
 }
