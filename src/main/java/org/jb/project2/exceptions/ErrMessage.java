@@ -19,7 +19,7 @@ public enum ErrMessage {
     CANT_UPDATE_COSTUMER_ID("can not update because you cant update an id of a costumer"),
     CANT_ADD_COUPON("cant add a coupon because a coupon with the same company id and tiltle already exists"),
     CANT_UPDATE_COUPON_ID("can not update because you cant update an id of a coupon"),
-    CANT_UPDATE_COUPON_COMPANY_ID("can not update because you cant update company id of a coupon"),
+    CANT_UPDATE_COUPON_COMPANY_ID("can not update/delete because you cant update/delete coupon that not yours"),
     COSTUMER_HAS_THIS_COUPON("YOU CANT PURCHASE THE SAME COUPON TWICE"),
     COUPON_OUT_OF_STOCK("sorry the coupon is out of stock"),
     COUPON_EXPIRED("cant purchase an expired coupon"),
