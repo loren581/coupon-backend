@@ -1,6 +1,7 @@
 package org.jb.project2.services;
 
 import org.jb.project2.beans.Company;
+import org.jb.project2.beans.Coupon;
 import org.jb.project2.beans.Customer;
 import org.jb.project2.exceptions.CouponSystemException;
 import org.jb.project2.exceptions.ErrMessage;
@@ -57,6 +58,12 @@ public class AdminServiceImpl extends ClientService implements AdminService {
         if (!companyRepository.existsById(companyId)) {
             throw new CouponSystemException(ErrMessage.COMPANY_ID_NOT_EXISTS);
         }
+        couponRepository.findByCompanyId(companyId).forEach(coupon ->couponRepository.deleteCouponPurchaseWithCouponId((int) coupon.getId()));
+//   List<Coupon> coupons=couponRepository.findByCompanyId(companyId);
+//        for (Coupon c:coupons
+//             ) {couponRepository.deleteCouponPurchaseWithCouponId((int) c.getId());
+//
+//        }
         companyRepository.deleteById(companyId);
 
     }
@@ -102,6 +109,7 @@ public class AdminServiceImpl extends ClientService implements AdminService {
         if (!customerRepository.existsById(customerId)) {
             throw new CouponSystemException(ErrMessage.COSTUMER_ID_NOT_EXISTS);
         }
+        couponRepository.deleteCouponPurchaseWithCustomerId(customerId);
         customerRepository.deleteById(customerId);
     }
 

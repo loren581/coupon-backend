@@ -34,9 +34,7 @@ public class Coupon {
     @Column(nullable = false, length = 40)
 
     private String image;
-//    @ManyToMany
-//    @ToString.Exclude
-//    List<Customer> customers;
+
 
 
 }

@@ -4,7 +4,6 @@ import org.jb.project2.beans.Category;
 import org.jb.project2.beans.Coupon;
 import org.jb.project2.exceptions.CouponSystemException;
 import org.jb.project2.login.ClientType;
-import org.jb.project2.login.LoginManager;
 import org.jb.project2.repos.CompanyRepository;
 import org.jb.project2.repos.CouponRepository;
 import org.jb.project2.repos.CustomerRepository;
@@ -26,13 +25,12 @@ public class CompanyServiceTest implements CommandLineRunner {
     private CompanyRepository companyRepository;
     @Autowired
     CustomerRepository customerRepository;
-    @Autowired
-    LoginManager loginManager;
+   @Autowired
+   private CompanyService companyService;
 
     @Override
     public void run(String... args) throws Exception {
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@checking addCoupon method and succeding@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        CompanyService companyService = (CompanyService) loginManager.login("mcdonalds@gmail.com", "1234", ClientType.COMPANY);
         Coupon coupon = new Coupon(1, companyRepository.findById(5).get(), Category.VACATION, "if you lucky you will get a vacation", "you have 20% to win a vacstion", Date.valueOf(LocalDate.now().minusMonths(3)), Date.valueOf(LocalDate.now().plusMonths(6)), 7, 100, "VACATIONNN");
         companyService.addCoupon(coupon, 5);
         System.out.println("checking addCoupon method and not suceeding same title");
@@ -70,7 +68,7 @@ public class CompanyServiceTest implements CommandLineRunner {
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@checking getAllCompanyCoupons method and suceeding@@@@@@@@@@@@@@@@@@@@@@@@@@ ");
         Coupon coupon5 = new Coupon(3, companyRepository.findById(5).get(),Category.FOOD, "ice cream", "buy one ice cream and get another one for free", Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plusMonths(2)), 3, 2.3, "ice creammm");
         Coupon coupon6 = new Coupon(4,companyRepository.findById(5).get(), Category.FOOD, "humburger for free", "buy one burger and get another one for free", Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plusMonths(3)), 3, 5.5, "burgerrr");
-        Coupon coupon7 = new Coupon(5,companyRepository.findById(5).get(), Category.FOOD, "1+1", "buy one coffee and get another one for free", Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plusMonths(4)), 3, 7, "coffeee");
+        Coupon coupon7 = new Coupon(5,companyRepository.findById(5).get(), Category.FOOD, "1+1", "buy one coffee and get another one for free", Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plusMonths(4)), 5, 7, "coffeee");
     companyService.addCoupon(coupon5,5);
     companyService.addCoupon(coupon6,5);
     companyService.addCoupon(coupon7,5);

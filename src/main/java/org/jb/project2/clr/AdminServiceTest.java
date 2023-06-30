@@ -6,7 +6,6 @@ import org.jb.project2.beans.Coupon;
 import org.jb.project2.beans.Customer;
 import org.jb.project2.exceptions.CouponSystemException;
 import org.jb.project2.login.ClientType;
-import org.jb.project2.login.LoginManager;
 import org.jb.project2.repos.CompanyRepository;
 import org.jb.project2.repos.CouponRepository;
 import org.jb.project2.repos.CustomerRepository;
@@ -25,7 +24,8 @@ import java.util.List;
 @Component
 @Order(1)
 public class AdminServiceTest implements CommandLineRunner {
-
+@Autowired
+private AdminService adminService;
 
     @Autowired
     private CouponRepository couponRepository;
@@ -33,12 +33,10 @@ public class AdminServiceTest implements CommandLineRunner {
     private CompanyRepository companyRepository;
     @Autowired
     CustomerRepository customerRepository;
-    @Autowired
-    LoginManager loginManager;
+
 
     @Override
     public void run(String... args) throws Exception {
-        AdminService adminService = (AdminService) loginManager.login("admin@gmail.com", "1234", ClientType.ADMINISTRATOR);
         System.out.println("@@@@@@@@@@@@@ checking add company method @@@@@@@@@@@@@@@@");
         Company company1 = Company.builder().name("coca-cola").email("cocacola@gmail.com").password("1234").build();
         Company company2 = Company.builder().name("cocicoli").email("cocacola@gmail.com").password("1234").build();
