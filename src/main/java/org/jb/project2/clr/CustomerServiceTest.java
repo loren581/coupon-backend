@@ -39,6 +39,7 @@ public class CustomerServiceTest implements CommandLineRunner {
         } catch (CouponSystemException e) {
             System.out.println(e.getMessage());
         }
+        System.out.println();
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@checking addCouponPurchase and not suceeding-amount is 0 purchased@@@@@@@@@@@@@@@@@@@@@@");
         Coupon coupon = new Coupon(6, companyRepository.findById(5).get(), Category.VACATION, "if you lucky you will get a spa", "you have 80% to win a spa", Date.valueOf(LocalDate.now().minusMonths(3)), Date.valueOf(LocalDate.now().plusMonths(6)), 0, 100, "SPAAA");
       couponRepository.save(coupon);
@@ -48,5 +49,18 @@ public class CustomerServiceTest implements CommandLineRunner {
       catch (CouponSystemException e){
           System.out.println(e.getMessage());
       }
-adminService.deleteCustomer(2);    }
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@checking getCustomerCoupons@@@@@@@@@@@@@@@@@@@@");
+        System.out.println(customerService.getCostumersCoupons(2));
+        System.out.println();
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@checking getCustomerCouponsByMaxPrice@@@@@@@@@@@@@@@@@@@@");
+        System.out.println(customerService.getCostumersCoupons(2,5.0));
+        System.out.println();
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@checking getCustomerCouponsByCategory@@@@@@@@@@@@@@@@@@@@");
+        System.out.println(customerService.getCostumersCoupons(2,Category.FOOD));
+        System.out.println();
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@checking get customerDetails");
+        System.out.println(customerService.getCostumerDetails(2));
+        Coupon coupon2 = new Coupon(7, companyRepository.findById(5).get(), Category.VACATION, "if you  you will get a spa", "you have % to win a spa", Date.valueOf(LocalDate.now().minusMonths(3)), Date.valueOf(LocalDate.now().minusMonths(6)), 0, 100, "SPAAA");
+couponRepository.save(coupon2);
+    }
 }

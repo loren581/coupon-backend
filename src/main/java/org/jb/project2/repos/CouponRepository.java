@@ -26,5 +26,27 @@ public interface CouponRepository extends JpaRepository<Coupon,Integer> {
     @Transactional
     @Modifying
     void deleteCouponPurchaseWithCustomerId(int customerId);
+    @Query(nativeQuery = true,value = "SELECT  `spring-159`.coupon.id,`spring-159`.coupon.company_id,`spring-159`.coupon.category,`spring-159`.coupon.title,`spring-159`.`coupon`.description,`spring-159`.coupon.start_date,`spring-159`.coupon.end_date,`spring-159`.coupon.amount,`spring-159`.coupon.price,`spring-159`.coupon.image\n" +
+            "            FROM `spring-159`.coupon\n" +
+            "            INNER JOIN `spring-159`.customer_coupons\n" +
+            "            ON `spring-159`.`customer_coupons`.`coupons_id`=`spring-159`.coupon.id\n" +
+            "            where (`spring-159`.`customer_coupons`.customer_id=?)")
+    List<Coupon>  getAllCouponsByCustomerId(int customerId);
+    @Query(nativeQuery = true,value = "SELECT  `spring-159`.coupon.id,`spring-159`.coupon.company_id,`spring-159`.coupon.category,`spring-159`.coupon.title,`spring-159`.`coupon`.description,`spring-159`.coupon.start_date,`spring-159`.coupon.end_date,`spring-159`.coupon.amount,`spring-159`.coupon.price,`spring-159`.coupon.image\n" +
+            "            FROM `spring-159`.coupon\n" +
+            "            INNER JOIN `spring-159`.customer_coupons\n" +
+            "            ON `spring-159`.`customer_coupons`.`coupons_id`=`spring-159`.coupon.id\n" +
+            "            where (`spring-159`.`customer_coupons`.customer_id=?) and(`spring-159`.coupon.category=?)")
+    List<Coupon>  getAllCouponsByCustomerIdAndCategory(int customerId,int categoryId);
+    @Query(nativeQuery = true,value = "SELECT  `spring-159`.coupon.id,`spring-159`.coupon.company_id,`spring-159`.coupon.category,`spring-159`.coupon.title,`spring-159`.`coupon`.description,`spring-159`.coupon.start_date,`spring-159`.coupon.end_date,`spring-159`.coupon.amount,`spring-159`.coupon.price,`spring-159`.coupon.image\n" +
+            "            FROM `spring-159`.coupon\n" +
+            "            INNER JOIN `spring-159`.customer_coupons\n" +
+            "            ON `spring-159`.`customer_coupons`.`coupons_id`=`spring-159`.coupon.id\n" +
+            "            where (`spring-159`.`customer_coupons`.customer_id=?) and(`spring-159`.coupon.price<?)")
+    List<Coupon>  getAllCouponsByCustomerIdAndMaxPrice(int customerId, Double maxPrice);
+
+    @Query(nativeQuery = true,value = "select * FROM `spring-159`.coupon where(end_date<date(now()))")
+    List<Coupon> getExpiredCoupons();
+
 
 }
